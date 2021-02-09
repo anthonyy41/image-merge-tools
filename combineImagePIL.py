@@ -52,9 +52,9 @@ def squareMerge():
     print('單張高度', singleHeight)
     print('單張寬度', singleWidth)
 
-    for column in range(0, mergeWidth, singleHeight):
+    for column in range(0, mergeWidth, singleWidth):
 
-        for row in range(0, mergeHeight, singleWidth):
+        for row in range(0, mergeHeight, singleHeight):
 
             choiceResult = random.choice(imagelist)
             rotateAngle = random.choice(angles)
@@ -64,9 +64,10 @@ def squareMerge():
             print("choice log", choiceResult)
 
             # Resize image
-            im.thumbnail((singleHeight, singleWidth))
+            # im.thumbnail((singleHeight, singleWidth))
+            resizeImg = im.resize((singleWidth, singleHeight), Image.ANTIALIAS)
 
-            new_im.paste(im.rotate(rotateAngle), (column, row))
+            new_im.paste(resizeImg.rotate(rotateAngle), (column, row))
             print(rotateAngle)
 
     # mergePath = 'D:/USER/Desktop/mergeImage1.jpg'
@@ -83,7 +84,6 @@ def squareMerge():
 def rectangleMerge():
 
     imagelist = []
-    # sourcePath = 'D:/livingroompic/01'
     sourcePath = sourcePath_entry.get()
 
     print(sourcePath_entry.get())
@@ -129,9 +129,11 @@ def rectangleMerge():
             print("choice log", choiceResult)
 
             # Resize image
-            im.thumbnail((singleHeight, singleWidth))
+            # im.resize((singleWidth, singleHeight))
+            resizeImg = im.resize((singleWidth, singleHeight), Image.ANTIALIAS)
+            # im.thumbnail((singleWidth, singleHeight))
 
-            new_im.paste(im.rotate(rotateAngle), (column, row))
+            new_im.paste(resizeImg.rotate(rotateAngle), (column, row))
             print(rotateAngle)
 
     # mergePath = 'D:/USER/Desktop/mergeImage1.jpg'
